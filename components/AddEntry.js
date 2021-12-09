@@ -78,6 +78,7 @@ class AddEntry extends Component {
   submit = () => {
     const key = timeToString();
     const entry = this.state;
+    const { navigation } = this.props;
 
     //Update redux
     this.props.dispatch(
@@ -95,6 +96,7 @@ class AddEntry extends Component {
     }));
 
     //Navigate home
+    navigation.navigate('History');
 
     //save to DB
     submitEntry({ entry, key });
@@ -105,6 +107,7 @@ class AddEntry extends Component {
   reset = () => {
     const key = timeToString();
     const entry = this.state;
+    const { navigation } = this.props;
 
     //Update redux
     this.props.dispatch(
@@ -122,6 +125,7 @@ class AddEntry extends Component {
     }));
 
     //Navigate home
+    navigation.navigate('History');
 
     //save to DB
     removeEntry(key);
@@ -231,10 +235,11 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { navigation }) {
   const key = timeToString();
   return {
     alreadyLogged: state[key] && typeof state[key].today === 'undefined',
+    navigation,
   };
 }
 

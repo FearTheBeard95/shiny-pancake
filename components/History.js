@@ -21,7 +21,7 @@ class History extends Component {
     ready: false,
   };
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, navigation } = this.props;
 
     fetchCalendarResults()
       .then((entries) => dispatch(receiveEntries(entries)))
@@ -44,7 +44,11 @@ class History extends Component {
           <Text style={styles.noDataText}>{today}</Text>
         </View>
       ) : (
-        <TouchableOpacity onPress={() => console.log('Pressed!')}>
+        <TouchableOpacity
+          onPress={() =>
+            this.props.navigation.navigate('EntryDetail', { entryId: key })
+          }
+        >
           <MetricCard metrics={metrics} date={formattedDate} />
         </TouchableOpacity>
       )}
