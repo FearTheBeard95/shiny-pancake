@@ -1,10 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { purple } from '../utils/colors';
 
 export default function ({ date }) {
   return (
     <View>
-      <Text>{date}</Text>
+      <Text style={{ fontSize: 25, color: purple }}>{date}</Text>
     </View>
   );
 }
