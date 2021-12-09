@@ -9,7 +9,7 @@ import {
 import {
   getMetricDataInfo,
   timeToString,
-  getDailyRemainder,
+  getDailyReminderValue,
 } from '../utils/helpers';
 import DateHeader from './DateHeader';
 import Slider from './Slider';
@@ -109,7 +109,7 @@ class AddEntry extends Component {
     //Update redux
     this.props.dispatch(
       addEntry({
-        [key]: getDailyRemainder(),
+        [key]: getDailyReminderValue(),
       })
     );
 
