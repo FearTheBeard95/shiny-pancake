@@ -5,12 +5,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import AddEntry from './components/AddEntry';
 import store from './store';
+import History from './components/History';
 
 export default function App() {
   return (
     <Provider store={store}>
       <View style={{ flex: 1 }}>
-        <AddEntry />
+        <View style={{ height: 20 }} />
+        <History />
       </View>
     </Provider>
   );
