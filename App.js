@@ -11,6 +11,7 @@ import store from './store';
 import History from './components/History';
 import EntryDetail from './components/EntryDetail';
 import { gray, purple } from './utils/colors';
+import Live from './components/live';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +35,17 @@ const HomeTabs = () => (
         headerTitleAlign: 'center',
         tabBarIcon: ({ focused, color, size }) => (
           <Ionicons name='add' size={25} color={gray} focused={true} />
+        ),
+      }}
+    />
+
+    <Tab.Screen
+      name='Live'
+      component={Live}
+      options={{
+        headerTitleAlign: 'center',
+        tabBarIcon: ({ focused, color, size }) => (
+          <Ionicons name='speedometer' size={25} color={gray} focused={true} />
         ),
       }}
     />
