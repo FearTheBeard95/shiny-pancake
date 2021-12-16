@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import * as Location from 'expo-location';
-import * as Permission from 'expo-permissions';
 import { calculateDirection } from '../utils/helpers';
 import { Foundation } from '@expo/vector-icons';
 import { purple, white } from '../utils/colors';

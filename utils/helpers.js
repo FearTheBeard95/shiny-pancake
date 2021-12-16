@@ -1,13 +1,16 @@
 // utils/helpers.js
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   FontAwesome,
   MaterialIcons,
   MaterialCommunityIcons,
 } from '@expo/vector-icons';
-
+import * as Notifications from 'expo-notifications';
 import { white, red, orange, blue, lightPurp, pink } from './colors';
+
+const NOTIFICATIONS_KEY = 'UdaciFitness:notifications';
 
 export function isBetween(num, x, y) {
   if (num >= x && num <= y) {
@@ -146,4 +149,50 @@ export function getDailyReminderValue() {
   return {
     today: '🖐 Dont forget to log todays information',
   };
+}
+
+export function clearLocalNotification() {
+  return AsyncStorage.removeItem(NOTIFICATIONS_KEY);
+
+  Notifications.cancelAllScheduledNotificationsAsync();
+}
+export function createNotification() {
+  return {
+    title: 'Log your stats!',
+    body: '🖐 Dont forget to log todays information',
+    ios: {
+      sound: true,
+    },
+    android: {
+      sound: true,
+      priority: 'high',
+      sticky: false,
+      vibrate: true,
+    },
+  };
+}
+export function setLocalNotification() {
+  AsyncStorage.getItem(NOTIFICATIONS_KEY)
+    .then(JSON.parse)
+    .then((data) => {
+      if (data === null) {
+        Notifications.requestPermissionsAsync().then(({ status }) => {
+          if (status === 'granted') {
+            Notifications.cancelAllScheduledNotificationsAsync();
+
+            let tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(20);
+            tomorrow.setMinutes(0);
+
+            Notifications.scheduleNotificationAsync(createNotification(), {
+              time: tomorrow,
+              repeat: 'day',
+            });
+
+            AsyncStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(true));
+          }
+        });
+      }
+    });
 }

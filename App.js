@@ -12,6 +12,7 @@ import History from './components/History';
 import EntryDetail from './components/EntryDetail';
 import { gray, purple } from './utils/colors';
 import Live from './components/live';
+import { setLocalNotification } from './utils/helpers';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,6 +54,7 @@ const HomeTabs = () => (
 );
 
 export default function App() {
+  setLocalNotification();
   return (
     <Provider store={store}>
       <View style={{ flex: 1 }}>

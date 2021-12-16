@@ -10,6 +10,8 @@ import {
   getMetricDataInfo,
   timeToString,
   getDailyReminderValue,
+  clearLocalNotification,
+  setLocalNotification,
 } from '../utils/helpers';
 import DateHeader from './DateHeader';
 import Slider from './Slider';
@@ -102,6 +104,7 @@ class AddEntry extends Component {
     submitEntry({ entry, key });
 
     //Clear local notifications
+    clearLocalNotification().then(setLocalNotification);
   };
 
   reset = () => {
